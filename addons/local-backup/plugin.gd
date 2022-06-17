@@ -84,14 +84,18 @@ class BackupsPopupMenu:
 		connect("id_pressed", self, "_id_pressed")
 
 	func directory_is_valid() -> bool:
-		if Settings.has_directory():
+		if not Settings.has_directory():
 			printerr(
 				"No directory supplied, skipping backup. Choose a directory from the project settings."
 			)
 			return false
 
-		if Settings.is_directory():
+		if not Settings.directory_exists():
 			printerr("Backup directory does not exist")
+			return false
+
+		if Settings.is_directory_recursive():
+			printerr("Skipping backup because your backup directory is in the res://")
 			return false
 
 		return true
