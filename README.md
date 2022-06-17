@@ -28,6 +28,10 @@ Adds a timestamp to the backup name. This allows historical backups to be create
 * *DATE* - Appends *YYYYMMDD* to the backup name allowing snapshots to be generated daily.
 * *EPOCH* - Appends the number of milliseconds that have passed since EPOCH allowing new backups generate on each exit.
 
+### Max Threads
+
+The backups are created using threads. Using -1 will use all processors available to do the backup quickly. Using 0 or 1 will avoid creating entirely.
+
 ## Tool Menu
 
 ![tool-menu](screenshots/tool-menu.png)

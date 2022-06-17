@@ -12,6 +12,8 @@ const ROLLING_TIMESTAMP_NAME := "application/local_backup/rolling_timestamp"
 const ROLLING_TIMESTAMP_DEFAULT := RollingTimestamp.NONE
 const ROLLING_COUNT_NAME := "application/local_backup/rolling_count"
 const ROLLING_COUNT_DEFAULT := 1
+const MAX_THREADS_NAME := "application/local_backup/max_threads"
+const MAX_THREADS_DEFAULT = -1
 
 
 static func enum_to_hint(enumeration: Dictionary) -> String:
@@ -28,6 +30,12 @@ static func create_project_settings() -> void:
 		PROPERTY_HINT_ENUM,
 		enum_to_hint(RollingTimestamp)
 	)
+	create_project_setting(
+		MAX_THREADS_NAME,
+		MAX_THREADS_DEFAULT,
+		PROPERTY_HINT_RANGE,
+		"-1," + String(OS.get_processor_count())
+	)
 
 
 static func clear_project_settings() -> void:
@@ -35,6 +43,7 @@ static func clear_project_settings() -> void:
 	ProjectSettings.clear(EXCLUDE_NAME)
 	ProjectSettings.clear(ON_EXIT_NAME)
 	ProjectSettings.clear(ROLLING_TIMESTAMP_NAME)
+	ProjectSettings.clear(MAX_THREADS_NAME)
 
 
 static func create_project_setting(
@@ -112,3 +121,12 @@ static func generate_rolling_timestamp() -> String:
 
 static func get_rolling_count() -> int:
 	return get_setting(ROLLING_COUNT_NAME, ROLLING_COUNT_DEFAULT)
+
+
+static func get_max_threads() -> int:
+	return get_setting(MAX_THREADS_NAME, MAX_THREADS_DEFAULT)
+
+
+static func generate_max_threads() -> int:
+	var max_threads := get_max_threads()
+	return OS.get_processor_count() if max_threads == -1 else max_threads
