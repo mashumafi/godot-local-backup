@@ -52,9 +52,18 @@ class ReplaceFile:
 
 	func do_work() -> void:
 		var file := File.new()
-		var src := file.get_sha256(from)
-		var dst := file.get_sha256(to)
-		if src == dst:
+		var from_modified = file.get_modified_time(from)
+		var to_modified = file.get_modified_time(to)
+		if from_modified is String:
+			printerr("Could not get modified time for " + from)
+		elif to_modified is String:
+			printerr("Could not get modified time for " + to)
+		elif from_modified <= to_modified:
+			return
+
+		var from_sha256 := file.get_sha256(from)
+		var to_sha256 := file.get_sha256(to)
+		if from_sha256 == to_sha256:
 			return
 
 		var copy := CopyFile.new(from, to)
