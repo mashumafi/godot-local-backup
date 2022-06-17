@@ -38,6 +38,10 @@ Create a backup immediately.
 
 Opens the backup folder using the computer's built in file explorer.
 
+## Example
+
+![example](screenshots/example.png)
+
 ## Suggestions
 
 These are just some ways you should backup your game.
