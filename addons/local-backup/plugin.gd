@@ -115,11 +115,9 @@ class BackupsPopupMenu:
 		var threads := []
 		for index in num_threads:
 			var thread := Thread.new()
-			thread.start(self, "_worker", {
-				"jobs": jobs,
-				"index": index,
-				"num_threads": num_threads
-			})
+			thread.start(
+				self, "_worker", {"jobs": jobs, "index": index, "num_threads": num_threads}
+			)
 			threads.append(thread)
 		for thread in threads:
 			thread.wait_to_finish()
