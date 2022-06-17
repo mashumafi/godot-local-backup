@@ -83,17 +83,34 @@ class BackupsPopupMenu:
 
 		connect("id_pressed", self, "_id_pressed")
 
+	func directory_is_valid() -> bool:
+		if Settings.has_directory():
+			printerr(
+				"No directory supplied, skipping backup. Choose a directory from the project settings."
+			)
+			return false
+
+		if Settings.is_directory():
+			printerr("Backup directory does not exist")
+			return false
+
+		return true
+
 	func _id_pressed(id: int) -> void:
 		match id:
 			Backup.CREATE:
 				create_backup()
 			Backup.OPEN:
-				OS.shell_open("file://" + Settings.get_directory())
+				if directory_is_valid():
+					OS.shell_open("file://" + Settings.get_directory())
 
 	func src_to_dest(src: String) -> String:
 		return Settings.generate_directory().plus_file(src)
 
 	func create_backup() -> void:
+		if not directory_is_valid():
+			return
+
 		prints("Creating backup at ", Settings.generate_directory())
 		var start_time := OS.get_system_time_msecs()
 		var exclude := set_from_array(Settings.get_exclude())

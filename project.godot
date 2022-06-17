@@ -10,9 +10,11 @@ config_version=4
 
 [application]
 
-config/name="project"
+config/name="Local Backup"
+config/description="Create a backup of your project locally"
 config/icon="res://icon.png"
 local_backup/directory="/Users/matthew/Code/godot/3.x/backups"
+local_backup/rolling_timestamp=1
 
 [editor_plugins]
 

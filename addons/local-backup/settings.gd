@@ -67,6 +67,15 @@ static func get_application_name() -> String:
 	return get_setting("application/config/name", "backup").http_escape()
 
 
+static func has_directory() -> bool:
+	return not get_directory().empty()
+
+
+static func is_directory() -> bool:
+	var dir := Directory.new()
+	return dir.dir_exists(get_directory())
+
+
 static func generate_directory() -> String:
 	return get_directory().plus_file(get_application_name() + generate_rolling_timestamp()).plus_file(
 		""
