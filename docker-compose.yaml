@@ -8,7 +8,7 @@ services:
       dockerfile: gdtoolkit.Dockerfile
     volumes:
       - .:/workdir
-    command: gdlint addons/nylon
+    command: gdlint addons/local-backup
 
   gdformat:
     build:
@@ -16,4 +16,4 @@ services:
       dockerfile: gdtoolkit.Dockerfile
     volumes:
       - .:/workdir
-    command: gdformat addons/nylon
+    command: gdformat addons/local-backup

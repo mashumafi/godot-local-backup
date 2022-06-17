@@ -63,8 +63,12 @@ static func get_directory() -> String:
 	return get_setting(DIRECTORY_NAME, DIRECTORY_DEFAULT)
 
 
+static func get_application_name() -> String:
+	return get_setting("application/config/name", "backup").http_escape()
+
+
 static func generate_directory() -> String:
-	return get_directory().plus_file(get_setting("application/config/name", "backup") + generate_rolling_timestamp()).plus_file(
+	return get_directory().plus_file(get_application_name() + generate_rolling_timestamp()).plus_file(
 		""
 	)
 
