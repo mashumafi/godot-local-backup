@@ -2,6 +2,8 @@
 
 Create backups of you project in a local directory
 
+*Disclaimer: This plugin is in no way meant to replace proper version control systems such as Git. This addon should be used to supliment existing backup solutions and give proper coverage in an extreme outage. It gives you one more source to fallback if you are not able to recover your project your primary sources.*
+
 ## Project Settings
 
 ![project-settings](screenshots/project-setting.png)
