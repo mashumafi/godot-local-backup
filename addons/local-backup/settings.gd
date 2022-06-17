@@ -75,6 +75,7 @@ static func directory_exists() -> bool:
 	var dir := Directory.new()
 	return dir.dir_exists(get_directory())
 
+
 static func is_directory_recursive() -> bool:
 	return get_directory().begins_with(ProjectSettings.globalize_path("res://"))
 
