@@ -58,7 +58,7 @@ class ReplaceFile:
 			printerr("Could not get modified time for " + from)
 		elif to_modified is String:
 			printerr("Could not get modified time for " + to)
-		elif from_modified < to_modified:
+		elif from_modified <= to_modified:
 			return
 
 		var from_sha256 := file.get_sha256(from)
