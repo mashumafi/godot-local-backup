@@ -111,6 +111,24 @@ class BackupsPopupMenu:
 	func src_to_dest(src: String) -> String:
 		return Settings.generate_directory().plus_file(src)
 
+	func run_in_parallel(jobs: Array, num_threads: int):
+		var threads := []
+		for index in num_threads:
+			var thread := Thread.new()
+			thread.start(self, "_worker", {
+				"jobs": jobs,
+				"index": index,
+				"num_threads": num_threads
+			})
+			threads.append(thread)
+		for thread in threads:
+			thread.wait_to_finish()
+
+	func _worker(data: Dictionary):
+		for i in range(data["index"], data["jobs"].size(), data["num_threads"]):
+			data["jobs"][i].do_work()
+			data["jobs"][i] = null
+
 	func create_backup() -> void:
 		if not directory_is_valid():
 			return
@@ -134,10 +152,9 @@ class BackupsPopupMenu:
 			jobs.append(RemoveFile.new(src_to_dest(file)))
 		for file in kept:
 			jobs.append(ReplaceFile.new(file, src_to_dest(file)))
-		while not jobs.empty():
-			var job = jobs.front()
-			jobs.pop_front()
-			job.do_work()
+		run_in_parallel(jobs, OS.get_processor_count())
+		for job in jobs:
+			assert(job == null)
 		print("Added: ", added.size())
 		print("Removed: ", removed.size())
 		print("Kept: ", kept.size())
