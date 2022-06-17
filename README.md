@@ -37,3 +37,19 @@ Create a backup immediately.
 ### Open Backup Folder
 
 Opens the backup folder using the computer's built in file explorer.
+
+## Suggestions
+
+These are just some ways you should backup your game.
+
+### Hard Drive
+
+Plug an external hard drive and update the plugin settings to create backups there.
+
+### Network Drive
+
+If you have other PCs on your network you could setup a network drive and create your backups remotely.
+
+### Cloud
+
+Many cloud storage backup a folder on your PC. Adjust the plugin settings to use that directory.
