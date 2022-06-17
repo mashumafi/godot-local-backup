@@ -111,6 +111,16 @@ class BackupsPopupMenu:
 	func src_to_dest(src: String) -> String:
 		return Settings.generate_directory().plus_file(src)
 
+	func do_work(jobs: Array) -> void:
+		var max_threads := Settings.generate_max_threads()
+		if max_threads < 2:
+			while not jobs.empty():
+				var job = jobs.front()
+				jobs.pop_front()
+				job.do_work()
+		else:
+			run_in_parallel(jobs, max_threads)
+
 	func run_in_parallel(jobs: Array, num_threads: int):
 		var threads := []
 		for index in num_threads:
@@ -150,7 +160,7 @@ class BackupsPopupMenu:
 			jobs.append(RemoveFile.new(src_to_dest(file)))
 		for file in kept:
 			jobs.append(ReplaceFile.new(file, src_to_dest(file)))
-		run_in_parallel(jobs, OS.get_processor_count())
+		do_work(jobs)
 		for job in jobs:
 			assert(job == null)
 		print("Added: ", added.size())
