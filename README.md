@@ -28,7 +28,7 @@ Adds a timestamp to the backup name. This allows historical backups to be create
 
 ### Max Threads
 
-The backups are created using threads. Using -1 will use all processors available to do the backup quickly. Using 0 or 1 will avoid creating entierly.
+The backups are created using threads. Using -1 will use all processors available to do the backup quickly. Using 0 or 1 will avoid creating entirely.
 
 ## Tool Menu
 
