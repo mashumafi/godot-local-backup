@@ -30,7 +30,12 @@ static func create_project_settings() -> void:
 		PROPERTY_HINT_ENUM,
 		enum_to_hint(RollingTimestamp)
 	)
-	create_project_setting(MAX_THREADS_NAME, MAX_THREADS_DEFAULT, PROPERTY_HINT_RANGE, "-1," + String(OS.get_processor_count()))
+	create_project_setting(
+		MAX_THREADS_NAME,
+		MAX_THREADS_DEFAULT,
+		PROPERTY_HINT_RANGE,
+		"-1," + String(OS.get_processor_count())
+	)
 
 
 static func clear_project_settings() -> void:
@@ -117,8 +122,10 @@ static func generate_rolling_timestamp() -> String:
 static func get_rolling_count() -> int:
 	return get_setting(ROLLING_COUNT_NAME, ROLLING_COUNT_DEFAULT)
 
+
 static func get_max_threads() -> int:
 	return get_setting(MAX_THREADS_NAME, MAX_THREADS_DEFAULT)
+
 
 static func generate_max_threads() -> int:
 	var max_threads := get_max_threads()
