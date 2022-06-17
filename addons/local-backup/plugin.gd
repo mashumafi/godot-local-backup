@@ -50,18 +50,12 @@ class ReplaceFile:
 		self.from = from
 		self.to = to
 
-	func read_all(path: String) -> PoolByteArray:
-		var file := File.new()
-		if OK != file.open(path, File.READ):
-			return PoolByteArray()
-		return file.get_buffer(file.get_len())
-
 	func do_work() -> void:
-		var src := read_all(from)
-		var dst := read_all(to)
-		if src.size() == dst.size():
-			if src == dst:
-				return
+		var file := File.new()
+		var src := file.get_sha256(from)
+		var dst := file.get_sha256(to)
+		if src == dst:
+			return
 
 		var copy := CopyFile.new(from, to)
 		copy.do_work()

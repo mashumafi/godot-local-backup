@@ -24,13 +24,13 @@ Creates backups when exiting the editor.
 
 Adds a timestamp to the backup name. This allows historical backups to be created.
 
-* *NONE* - Adds no extra timestamp which would only ever create 1 backup.
-* *DATE* - Appends *YYYYMMDD* to the backup name allowing snapshots to be generated daily.
-* *EPOCH* - Appends the number of milliseconds that have passed since EPOCH allowing new backups generate on each exit.
+* `NONE` - Adds no extra timestamp which would only ever create 1 backup.
+* `DATE` - Appends *YYYYMMDD* to the backup name allowing snapshots to be generated daily.
+* `EPOCH` - Appends the number of milliseconds that have passed since EPOCH which will generate a unique backup each time.
 
 ### Max Threads
 
-The backups are created using threads. Using -1 will use all processors available to do the backup quickly. Using 0 or 1 will avoid creating entirely.
+The backups are created using threads. Using `-1` will use all processors available to do the backup quickly. Using `0` or `1` will avoid creating entirely.
 
 ## Tool Menu
 
